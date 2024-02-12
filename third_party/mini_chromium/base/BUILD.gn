@@ -5,10 +5,7 @@
 import("../build/platform.gni")
 
 config("base_public_config") {
-  include_dirs = [ ".." ]
-  if (use_cobalt_customizations) {
-    cflags = [ "-isystem" + rebase_path("../../..", root_build_dir) ]
-  }
+  include_dirs = [ "..", "//" ]
 }
 
 static_library("base") {

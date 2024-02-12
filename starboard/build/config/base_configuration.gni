@@ -175,6 +175,9 @@ declare_args() {
   # all unused symbols and nplb fails to link.
   # TODO: b/297808555 Remove this flag after nplb is fixed
   sb_has_unused_symbol_issue = false
+
+  # Enables crashpad integration
+  sb_crashpad_integration = false
 }
 
 if (current_toolchain == starboard_toolchain &&

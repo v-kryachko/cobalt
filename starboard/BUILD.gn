@@ -86,6 +86,9 @@ group("gn_all") {
       }
     }
   }
+  if (sb_crashpad_integration) {
+    deps += [ "//third_party/crashpad/client" ]
+  }
 }
 
 group("default") {
