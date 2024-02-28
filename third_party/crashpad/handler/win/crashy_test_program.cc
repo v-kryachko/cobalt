@@ -32,6 +32,11 @@
 #include "client/crashpad_info.h"
 #include "util/win/critical_section_with_debug_info.h"
 #include "util/win/get_function.h"
+#ifdef STARBOARD
+#include <starboard/client_porting/wrap_main/wrap_main.h>
+#include <starboard/shared/win32/wchar_utils.h>
+using starboard::shared::win32::CStringToWString;
+#endif
 
 // ntstatus.h conflicts with windows.h so define this locally.
 #ifndef STATUS_NO_SUCH_FILE
@@ -174,7 +179,7 @@ void AllocateExtraUnsavedMemory(crashpad::SimpleAddressRangeBag* extra_ranges) {
   extra_ranges->Remove(extra_memory, sizeof(extra_memory[0]) * kNumVals);
 }
 
-int CrashyMain(int argc, wchar_t* argv[]) {
+int CrashyMain(int argc, const wchar_t* argv[]) {
   CrashpadClient client;
 
   if (argc == 2) {
@@ -260,6 +265,23 @@ int CrashyMain(int argc, wchar_t* argv[]) {
 }  // namespace
 }  // namespace crashpad
 
+
+#ifdef STARBOARD
+int CrashyMainWrap(int argc, char **argv) {
+  std::vector<std::wstring> w_args(argc);
+  const wchar_t** wchar_args = new const wchar_t*[argc];
+  for (int c=0; c<argc; c++) {
+    w_args.push_back(CStringToWString(argv[c]));
+    wchar_args[c] = w_args[c].c_str();
+  }
+  return crashpad::CrashyMain(argc, wchar_args);
+}
+
+STARBOARD_WRAP_SIMPLE_MAIN(CrashyMainWrap);
+
+#else
 int wmain(int argc, wchar_t* argv[]) {
   return crashpad::CrashyMain(argc, argv);
 }
+
+#endif

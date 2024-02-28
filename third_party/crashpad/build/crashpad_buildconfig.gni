@@ -95,8 +95,16 @@ template("crashpad_executable") {
     }
     configs -= [ "//build/config/compiler:default_include_dirs" ]
 
+    deps = []
+
     if (defined(invoker.configs)) {
       configs += invoker.configs
+    }
+    if (defined(invoker.deps)) {
+      deps += invoker.deps
+    }
+    if (crashpad_is_in_starboard) {
+      deps += [ "//starboard:starboard_group" ]
     }
 
     if (crashpad_is_in_fuchsia) {

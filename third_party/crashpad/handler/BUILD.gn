@@ -264,7 +264,17 @@ if (crashpad_is_win) {
     deps = [
       "../client",
       "../third_party/mini_chromium:base",
+      ":copy_crashpad_handler",
     ]
+  }
+
+  if (is_starboard) {
+    copy("copy_crashpad_handler") {
+      install_content = true
+      sources = [ "$root_out_dir/native_target/crashpad_handler.exe" ]
+      deps = [ ":crashpad_handler(//$starboard_path/toolchain:native_target)" ]
+      outputs = [ "$sb_static_contents_output_data_dir/crashpad_handler.exe" ]
+    }
   }
 
   crashpad_executable("crashy_signal") {
