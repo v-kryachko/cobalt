@@ -37,6 +37,7 @@ config("platform_configuration") {
 
   ldflags += [
     "/DYNAMICBASE",
+    "/DEBUG",
 
     # TODO: SubSystem is hardcoded in
     # win/sources_template.vcxproj. This will have the exe behave in the

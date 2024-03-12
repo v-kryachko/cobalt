@@ -17,7 +17,9 @@
 #include <vector>
 
 #include "base/files/file_path.h"
-#include "base/logging.h"
+//#include "base/logging.h"
+#include "starboard/common/log.h"
+#include "base/strings/utf_string_conversions.h"
 #include "gtest/gtest.h"
 #include "test/test_paths.h"
 #include "test/scoped_temp_dir.h"
@@ -31,8 +33,13 @@ namespace test {
 namespace {
 
 void StartAndUseHandler(const base::FilePath& temp_dir) {
-  base::FilePath handler_path = TestPaths::Executable().DirName().Append(
-      FILE_PATH_LITERAL("crashpad_handler.com"));
+  std::vector<char> content_path(kSbFileMaxPath + 1);
+  ASSERT_TRUE(SbSystemGetPath(kSbSystemPathContentDirectory, content_path.data(),
+                           content_path.size()));
+  base::FilePath handler_path = base::FilePath(base::UTF8ToUTF16(content_path.data()))
+      .Append(FILE_PATH_LITERAL("crashpad_handler.exe"));
+
+  SbLogRawFormatF("handler_path=%ws\n", handler_path.value().c_str());
 
   CrashpadClient client;
   ASSERT_TRUE(client.StartHandler(handler_path,
