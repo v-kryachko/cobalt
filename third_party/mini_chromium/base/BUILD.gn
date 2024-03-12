@@ -6,6 +6,9 @@ import("../build/platform.gni")
 
 config("base_public_config") {
   include_dirs = [ "..", "//" ]
+  if (mini_chromium_is_win) {
+    defines = [ "OS_WIN" ]
+  }
 }
 
 static_library("base") {

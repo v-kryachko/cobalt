@@ -192,6 +192,10 @@ if (!crashpad_is_ios) {
       configs += [ "../build:native_target_executable_config" ]
     }
   }
+
+  group("native_crashpad_handler") {
+    public_deps = [ ":crashpad_handler($native_target_toolchain)" ]
+  }
 }
 
 # There is not any normal way to package native executables in an Android APK.
@@ -265,6 +269,18 @@ if (crashpad_is_win) {
       "../client",
       "../third_party/mini_chromium:base",
     ]
+    if (crashpad_is_in_starboard) {
+      deps += [ ":copy_crashpad_handler", ]
+    }
+  }
+
+  if (crashpad_is_in_starboard) {
+    copy("copy_crashpad_handler") {
+      install_content = true
+      sources = [ "$root_out_dir/native_target/crashpad_handler.exe" ]
+      deps = [ ":native_crashpad_handler" ]
+      outputs = [ "$sb_static_contents_output_data_dir/crashpad_handler.exe" ]
+    }
   }
 
   crashpad_executable("crashy_signal") {

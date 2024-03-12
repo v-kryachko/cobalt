@@ -32,7 +32,7 @@ namespace {
 
 void StartAndUseHandler(const base::FilePath& temp_dir) {
   base::FilePath handler_path = TestPaths::Executable().DirName().Append(
-      FILE_PATH_LITERAL("crashpad_handler.com"));
+      FILE_PATH_LITERAL("native_target/crashpad_handler.exe"));
 
   CrashpadClient client;
   ASSERT_TRUE(client.StartHandler(handler_path,
