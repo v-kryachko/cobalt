@@ -265,7 +265,6 @@ void Trace(LogSeverity severity, const char *message)
         }
         __android_log_print(android_priority, "ANGLE", "%s: %s\n", LogSeverityName(severity),
                             str.c_str());
-<<<<<<< HEAD
 #elif defined(STARBOARD)
         switch (severity)
         {
@@ -282,7 +281,6 @@ void Trace(LogSeverity severity, const char *message)
             default:
                 SB_LOG(INFO) << "Angle: " << message;
                 break;
-=======
 #elif defined(ANGLE_PLATFORM_APPLE)
         if (__builtin_available(macOS 10.12, iOS 10.0, *))
         {
@@ -308,7 +306,6 @@ void Trace(LogSeverity severity, const char *message)
             }
             os_log_with_type(OS_LOG_DEFAULT, apple_log_type, "ANGLE: %s: %s\n",
                              LogSeverityName(severity), str.c_str());
->>>>>>> e5ff6de524d0fb32a4d0f94960823f9dc679aa5a
         }
 #else
         // Note: we use fprintf because <iostream> includes static initializers.

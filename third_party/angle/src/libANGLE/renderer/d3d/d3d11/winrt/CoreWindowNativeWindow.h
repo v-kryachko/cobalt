@@ -49,17 +49,13 @@ class CoreWindowNativeWindow : public InspectableNativeWindow,
     ComPtr<IMap<HSTRING, IInspectable *>> mPropertyMap;
 };
 
-<<<<<<< HEAD
 // clang format would break the uuid below
 // clang-format off
 #if defined(STARBOARD)
 class CoreWindowSizeChangedHandler
 #else
-[uuid(7F924F66-EBAE-40E5-A10B-B8F35E245190)] class CoreWindowSizeChangedHandler
-#endif
-=======
 __declspec(uuid("7F924F66-EBAE-40E5-A10B-B8F35E245190")) class CoreWindowSizeChangedHandler
->>>>>>> e5ff6de524d0fb32a4d0f94960823f9dc679aa5a
+#endif
     : public Microsoft::WRL::RuntimeClass<
           Microsoft::WRL::RuntimeClassFlags<Microsoft::WRL::ClassicCom>,
           IWindowSizeChangedEventHandler>

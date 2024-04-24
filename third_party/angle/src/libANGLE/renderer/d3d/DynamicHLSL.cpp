@@ -28,7 +28,6 @@ namespace rx
 namespace
 {
 
-<<<<<<< HEAD
 #if defined(STARBOARD)
 // The following numbers are received from Recommendation ITU - R BT .2100 - 2(07 / 2018),
 // table 4 - PQ system reference non linear transfer functions
@@ -107,11 +106,10 @@ const std::string BT709_TO_BT2020_SHADER =
     "    return output;\n"
     "}\n";
 #endif  // STARBOARD
-=======
+
 // kShaderStorageDeclarationString must be the same as outputHLSL.
 constexpr const char kShaderStorageDeclarationString[] =
     "// @@ SHADER STORAGE DECLARATION STRING @@";
->>>>>>> e5ff6de524d0fb32a4d0f94960823f9dc679aa5a
 
 const char *HLSLComponentTypeString(GLenum componentType)
 {
@@ -497,7 +495,6 @@ std::string DynamicHLSL::generatePixelShaderForOutputSignature(
     return pixelHLSL;
 }
 
-<<<<<<< HEAD
 #if defined(STARBOARD)
 std::string DynamicHLSL::generatePixelShaderForHdrOutputSignature(
     const std::string &sourceShader,
@@ -513,11 +510,7 @@ std::string DynamicHLSL::generatePixelShaderForHdrOutputSignature(
 }
 #endif  // STARBOARD
 
-std::string DynamicHLSL::generateComputeShaderForImage2DBindSignature(
-    const d3d::Context *context,
-=======
 std::string DynamicHLSL::generateShaderForImage2DBindSignature(
->>>>>>> e5ff6de524d0fb32a4d0f94960823f9dc679aa5a
     ProgramD3D &programD3D,
     const gl::ProgramState &programData,
     gl::ShaderType shaderType,
