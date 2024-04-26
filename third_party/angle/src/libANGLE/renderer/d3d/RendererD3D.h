@@ -322,15 +322,10 @@ class RendererD3D : public BufferFactoryD3D
                                     const gl::Offset &destOffset,
                                     bool unpackFlipY,
                                     bool unpackPremultiplyAlpha,
-<<<<<<< HEAD
-                                    bool unpackUnmultiplyAlpha)                            = 0;
-    virtual TextureStorage *createTextureStorage2D(SwapChainD3D *swapChain)                = 0;
-    virtual TextureStorage *createTextureStorage2D(IUnknown *texture, bool bindChroma)     = 0;
-=======
                                     bool unpackUnmultiplyAlpha)                        = 0;
     virtual TextureStorage *createTextureStorage2D(SwapChainD3D *swapChain,
                                                    const std::string &label)           = 0;
->>>>>>> e5ff6de524d0fb32a4d0f94960823f9dc679aa5a
+    virtual TextureStorage *createTextureStorage2D(IUnknown *texture, bool bindChroma) = 0;
     virtual TextureStorage *createTextureStorageEGLImage(EGLImageD3D *eglImage,
                                                          RenderTargetD3D *renderTargetD3D,
                                                          const std::string &label)     = 0;

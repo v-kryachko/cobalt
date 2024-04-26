@@ -1715,22 +1715,7 @@ bool ValidateBindProgramPipelineBase(const Context *context,
                                      angle::EntryPoint entryPoint,
                                      ProgramPipelineID pipeline)
 {
-<<<<<<< HEAD
-    return ValidateGenOrDeleteES31(context, n);
-}
-
-bool ValidateBindProgramPipeline(Context *context, ProgramPipelineID pipeline)
-{
-    if (context->getClientVersion() < ES_3_1)
-    {
-        context->validationError(GL_INVALID_OPERATION, kES31Required);
-        return false;
-    }
-
     if (!context->isProgramPipelineGenerated(pipeline))
-=======
-    if (!context->isProgramPipelineGenerated({pipeline}))
->>>>>>> e5ff6de524d0fb32a4d0f94960823f9dc679aa5a
     {
         context->validationError(entryPoint, GL_INVALID_OPERATION, kObjectNotGenerated);
         return false;

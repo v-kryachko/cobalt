@@ -72,7 +72,11 @@ class SurfaceD3D : public SurfaceImpl
 
     const angle::Format *getD3DTextureColorFormat() const override;
 
-<<<<<<< HEAD
+    egl::Error attachToFramebuffer(const gl::Context *context,
+                                   gl::Framebuffer *framebuffer) override;
+    egl::Error detachFromFramebuffer(const gl::Context *context,
+                                     gl::Framebuffer *framebuffer) override;
+
     IUnknown *getD3DTexture() const
     {
         return mD3DTexture;
@@ -82,12 +86,6 @@ class SurfaceD3D : public SurfaceImpl
     {
       return mBindChroma;
     }
-=======
-    egl::Error attachToFramebuffer(const gl::Context *context,
-                                   gl::Framebuffer *framebuffer) override;
-    egl::Error detachFromFramebuffer(const gl::Context *context,
-                                     gl::Framebuffer *framebuffer) override;
->>>>>>> e5ff6de524d0fb32a4d0f94960823f9dc679aa5a
 
   protected:
     SurfaceD3D(const egl::SurfaceState &state,
@@ -125,6 +123,7 @@ class SurfaceD3D : public SurfaceImpl
 
     HANDLE mShareHandle;
     IUnknown *mD3DTexture;
+
     EGLenum mBuftype;
     bool mBindChroma;
 };

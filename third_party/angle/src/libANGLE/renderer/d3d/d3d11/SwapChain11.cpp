@@ -695,14 +695,10 @@ EGLint SwapChain11::reset(DisplayD3D *displayD3D,
         result = mRenderer->allocateResourceNoDesc(displayD3D, mBackBufferTexture.get(),
                                                    &mBackBufferSRView);
         ASSERT(result != angle::Result::Stop);
-<<<<<<< HEAD
-        mBackBufferSRView.setDebugName("Back buffer shader resource view");
+        mBackBufferSRView.setInternalName("BackBufferSRV");
 #if defined(STARBOARD)
         }
 #endif
-=======
-        mBackBufferSRView.setInternalName("BackBufferSRV");
->>>>>>> e5ff6de524d0fb32a4d0f94960823f9dc679aa5a
     }
 
     mFirstSwap = true;
