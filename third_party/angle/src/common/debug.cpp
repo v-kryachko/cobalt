@@ -281,6 +281,7 @@ void Trace(LogSeverity severity, const char *message)
             default:
                 SB_LOG(INFO) << "Angle: " << message;
                 break;
+        }
 #elif defined(ANGLE_PLATFORM_APPLE)
         if (__builtin_available(macOS 10.12, iOS 10.0, *))
         {
