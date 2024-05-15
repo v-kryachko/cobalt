@@ -49,7 +49,7 @@ declare_args() {
 
   # Abseil has trouble supporting MSVC, particularly regarding component builds.
   # http://crbug.com/1126524
-  angle_enable_abseil = angle_has_build && is_clang
+  angle_enable_abseil = angle_has_build && is_clang && !is_starboard
 
   # Adds run-time checks to filter out EVENT() messages when the debug annotator is disabled.
   angle_enable_annotator_run_time_checks = false

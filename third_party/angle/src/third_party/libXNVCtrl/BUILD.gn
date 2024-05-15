@@ -26,7 +26,7 @@ source_set("libXNVCtrl") {
 
   libs = [ "xcb" ]
 
-  if (is_starboard) {
+  if (is_starboard && false) {
     configs -= [ "//build/config/linux:x11" ]
     if (is_clang_16) {
       cflags = [

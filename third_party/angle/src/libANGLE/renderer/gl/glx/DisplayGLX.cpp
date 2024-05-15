@@ -459,15 +459,24 @@ SurfaceImpl *DisplayGLX::createPixmapSurface(const egl::SurfaceState &state,
                                              NativePixmapType nativePixmap,
                                              const egl::AttributeMap &attribs)
 {
+#if defined(STARBOARD)
+    UNIMPLEMENTED();
+    return nullptr;
+#else
     ASSERT(configIdToGLXConfig.count(state.config->configID) > 0);
     glx::FBConfig fbConfig = configIdToGLXConfig[state.config->configID];
     return new PixmapSurfaceGLX(state, nativePixmap, mGLX.getDisplay(), mGLX, fbConfig);
+#endif
 }
 
 egl::Error DisplayGLX::validatePixmap(const egl::Config *config,
                                       EGLNativePixmapType pixmap,
                                       const egl::AttributeMap &attributes) const
 {
+#if defined(STARBOARD)
+    UNREACHABLE();
+    return egl::EglBadDisplay() << "DisplayImpl::valdiatePixmap unimplemented.";
+#else
     Window rootWindow;
     int x                    = 0;
     int y                    = 0;
@@ -484,6 +493,7 @@ egl::Error DisplayGLX::validatePixmap(const egl::Config *config,
     }
 
     return egl::NoError();
+#endif
 }
 
 ContextImpl *DisplayGLX::createContext(const gl::State &state,
@@ -800,7 +810,8 @@ bool DisplayGLX::isValidNativeWindow(EGLNativeWindowType window) const
     // X11 error handler exits the program on any error.
     auto oldErrorHandler = XSetErrorHandler(IgnoreX11Errors);
     XWindowAttributes attributes;
-    int status = XGetWindowAttributes(mXDisplay, window, &attributes);
+    int status =
+        XGetWindowAttributes(mXDisplay, reinterpret_cast<Window>(window), &attributes);
     XSetErrorHandler(oldErrorHandler);
 
     return status != 0;
